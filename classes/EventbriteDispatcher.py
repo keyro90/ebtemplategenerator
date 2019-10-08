@@ -1,5 +1,6 @@
 import os
 import requests
+import json
 from werkzeug.exceptions import BadRequest
 
 
@@ -20,11 +21,12 @@ class EventbriteDispatcher:
             "Authorization": f'Bearer {self.api_token}'
         }
         params = {
-            "page_size": 10,
+            "page_size": 6,
             "order_by": "start_desc"
         }
         events = requests.get(url=f'{self.EVENTBRITE_URL}/users/me/events/', headers=headers, params=params)
         if events.status_code != 200:
             raise BadRequest("Response from Eventbrite no successfull.")
-        json_events = events.content.decode('utf8').replace("'", '"')
-        print(json_events)
+        json_events = events.content.decode('utf8')
+        ret_json = json.loads(json_events)
+        return ret_json
