@@ -2,9 +2,90 @@
 <html lang="it">
 <head>
     <style>
-        .card-img-top{
-            width: 286px !important;
-            height: 170px !important;
+        h1 {
+            color: #fff;
+            margin: 40px 0 60px 0;
+            font-weight: 300;
+        }
+
+        .our-team-main {
+            width: 100%;
+            height: auto;
+            border-bottom: 5px #323233 solid;
+            background: #fff;
+            text-align: center;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            transition: 0.5s;
+            margin-bottom: 28px;
+            margin-top: 10%;
+        }
+
+
+        .our-team-main img {
+            border-radius: 50%;
+            margin-bottom: 20px;
+            width: 90px;
+        }
+
+        .our-team-main h3 {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .our-team-main p {
+            margin-bottom: 0;
+        }
+
+        .team-back {
+            width: 100%;
+            height: auto;
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 5px 15px 0 15px;
+            text-align: left;
+            background: #fff;
+
+        }
+
+        .team-front {
+            width: 100%;
+            height: auto;
+            position: relative;
+            z-index: 10;
+            background: #fff;
+            padding: 15px;
+            bottom: 0px;
+            transition: all 0.5s ease;
+        }
+
+        .our-team-main:hover .team-front {
+            bottom: -200px;
+            transition: all 0.5s ease;
+        }
+
+        .our-team-main:hover {
+            border-color: #777;
+            transition: 0.5s;
+        }
+
+        /*our-team-main*/
+        .centerize {
+            height: 100%;
+            width: 100%;
+            margin-top: 10%;
+        }
+
+        .tl-colors {
+            background-color: #FFDA21 !important;
+            border-color: #FFDA21 !important;
+            color: black !important;
+        }
+
+        body {
+            background-color: #FFDA21 !important;
         }
     </style>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -25,28 +106,26 @@
 <body>
 <div class="container">
     <div class="row">
-        {% for i in range(0, 3) %}
-            <div class="card" style="width: 18rem;">
-                <img src="{{ AllEvents[i]["event_logo"] }}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">{{ AllEvents[i]["event_title"] }}</h5>
-                    <p class="card-text">{{ AllEvents[i]["event_description"] }}</p>
-                    <a href="{{ AllEvents[i]["event_url"] }}" class="btn btn-primary">Vai ai biglietti</a>
+
+        {% for i in range(0, len) %}
+            <div class="col-lg-4">
+                <div class="our-team-main">
+
+                    <div class="team-front">
+                        <img src="{{ AllEvents[i]["event_logo"] }}" class="img-fluid"/>
+                        <h3>{{ AllEvents[i]["event_title"] }}</h3>
+                        <p>{{ AllEvents[i]["event_description"] }}</p>
+                    </div>
+
+                    <div class="team-back">
+                        <a href="{{ AllEvents[i]["event_url"] }}" class="btn btn-primary btn-lg centerize tl-colors" target="_blank" role="button" aria-disabled="true">Vai all'evento</a>
+                    </div>
+
                 </div>
             </div>
         {% endfor %}
-    </div>
-    <div class="row">
-        {% for i in range(3, 6) %}
-            <div class="card" style="width: 18rem;">
-                <img src="{{ AllEvents[i]["event_logo"] }}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">{{ AllEvents[i]["event_title"] }}</h5>
-                    <p class="card-text">{{ AllEvents[i]["event_description"] }}</p>
-                    <a href="{{ AllEvents[i]["event_url"] }}" class="btn btn-primary">Vai ai biglietti</a>
-                </div>
-            </div>
-        {% endfor %}
+
+
     </div>
 
 
